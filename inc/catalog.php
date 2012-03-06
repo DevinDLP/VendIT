@@ -1,26 +1,26 @@
-<?php
-	require( "globals.php" );
-	
-	$request_type = $_GET['RequestType'];
+<?php 
+require( "globals.php" );
 
-	mysql_connect( $DB_HOST, $DB_USER, $DB_PASS ) or die( mysql_error() );
-	mysql_select_db( $DB_NAME ) or die( mysql_error() );
-	
-	if( $request_type == $LOAD_TRENDING ) {
-		$result = mysql_query( "SELECT * FROM products ORDER BY purchased_recently DESC" ) or die( mysql_error() );  
-	
-	} else if( $request_type == $LOAD_RECOMMENDED ) {
-	
-	} else if( $request_type == $LOAD_CATEGORY ) {
-		$category_type = $_GET['Category'];
+if( isset( $_POST['RequestType'] ) ) {
+	$request_type = $_POST['RequestType'];
+
+	mysql_connect( $DB_HOST, $DB_USER, $DB_PASS ) or die( mysql_error() ); mysql_select_db( $DB_NAME ) or die( mysql_error() );
+
+	if( $request_type == $LOAD_TRENDING ) { 
+		$result = mysql_query( "SELECT * FROM products ORDER BY purchased_recently DESC" ) or die( mysql_error() );
+	} else if( $request_type == $LOAD_RECOMMENDED && isset( $_SESSION['Username'] ) ) {
+
+	} else if( $request_type == $LOAD_CATEGORY && isset( $_POST['Category'] ) ) { 
+		$category_type = $_GET['Category']; 
 		$result = mysql_query( "SELECT * FROM products WHERE category='".$category_type."' ORDER BY purchased_recently DESC" ) or die( mysql_error() ); 
-	} else if( $request_type == $LOAD_SEARCH ) {
-		$search_query = mysql_real_escape_string($_GET['SearchQuery']);
+	} else if( $request_type == $LOAD_SEARCH && isset( $_POST['SearchQuery'] ) ) { 
+		$search_query = mysql_real_escape_string($_POST['SearchQuery']); 
 		$result = mysql_query( "SELECT * FROM products WHERE product_name LIKE '%".$search_query."%' OR description LIKE '%".$search_query."%' OR info LIKE '%".$search_query."%' ORDER BY purchased_recently DESC" ) or die( mysql_error() ); 
 	}
-	
-	while( $row = mysql_fetch_array( $result, MYSQL_BOTH ) )
+
+	while( $row = mysql_fetch_array( $result, MYSQL_BOTH ) ) 
 		GenProductView( $row );
+}
 	
 	function GenProductView( $product ) {
 		echo "<li class='product_card_container' id='product_".$product['product_id']."' onclick='viewProduct(event,\"".$product['product_id']."\");'>";

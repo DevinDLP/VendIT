@@ -27,11 +27,9 @@ $(document).ready(function(){
 			searchProducts($('#search').val());
 		}
 	});
-	
 	$('#content_shade').click(function(e){
 		e.stopPropagation();
 	});
-	
 	$('body').click(function(){
 		$('#content_shade').animate({height: 0 + 'px'}, 500);
 		$('#nav_categories').children('li').each(function () {
@@ -53,8 +51,9 @@ function searchProducts(search_query) {
 			displayResponse(xhr);
 		}
 	}
-	xhr.open("GET", "inc/catalog.php?RequestType=3&SearchQuery=" + search_query, true);
-	xhr.send(null);
+	xhr.open("POST", "inc/catalog.php", true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send("RequestType=3&SearchQuery=" + search_query);
 }
 
 function loadTrending() {
@@ -64,8 +63,9 @@ function loadTrending() {
 			loadCarousel(xhr);
 		}
 	}
-	xhr.open("GET", "inc/catalog.php?RequestType=0", true);
-	xhr.send(null);
+	xhr.open("POST", "inc/catalog.php", true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send("RequestType=0");
 }
 
 function loadCategory(event, category) {
@@ -91,8 +91,9 @@ function loadCategory(event, category) {
 			displayResponse(xhr);
 		}
 	}
-	xhr.open("GET", "inc/catalog.php?RequestType=2&Category=" + category, true);
-	xhr.send(null);
+	xhr.open("POST", "inc/catalog.php", true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send("RequestType=2&Category=" + category);
 }
 
 function loadCarousel(xhr) {
@@ -126,7 +127,8 @@ function viewProduct(event, product) {
 			displayResponse(xhr);
 		}
 	}
-	xhr.open("GET", "inc/product.php?ProductID=" + product, true);
-	xhr.send(null);
+	xhr.open("POST", "inc/product.php", true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send("ProductID=" + product);
 }
 

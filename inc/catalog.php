@@ -11,7 +11,7 @@
 		} else if( $request_type == $LOAD_RECOMMENDED && isset( $_SESSION['Username'] ) ) {
 
 		} else if( $request_type == $LOAD_CATEGORY && isset( $_POST['Category'] ) ) { 
-			$category_type = $_GET['Category']; 
+			$category_type = $_POST['Category']; 
 			$result = mysql_query( "SELECT * FROM products WHERE category='".$category_type."' ORDER BY purchased_recently DESC" ) or die( mysql_error() ); 
 		} else if( $request_type == $LOAD_SEARCH && isset( $_POST['SearchQuery'] ) ) { 
 			$search_query = mysql_real_escape_string($_POST['SearchQuery']); 

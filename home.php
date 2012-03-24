@@ -19,89 +19,120 @@
 		<style type="text/css">
 			@import url("css/reset.css");
 			@import url("css/styles.css");
+			@import url("http://fonts.googleapis.com/css?family=Michroma|Anonymous+Pro");
 		</style>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script> 
+		<script type="text/javascript" src="js/jquery.mousewheel.js"></script> 
 		<script type="text/javascript" src="js/script.js"></script>
 	</head>
 	
 	<body>
-		<div class="center_col">
-			<div class="logo_container">
-				<a href="home.php"><img id="logo" class="logo" src="img/vendit_logo.png" alt="vendIT" /></a>
+		<div id="bg_header">
+		</div>
+		
+		<div id="primary_container">
+
+			<div id="header_container">
+				<a href="home.php"><img id="logo" src="img/vendit_logo.png" alt="vendIT" /></a>
+				<div id="header_content">
+					<div id="top_nav_container">
+						<a id="join_link" class="first_nav_link" href="#">Join Today</a>
+						<a id="about_link" href="#">About Us</a>
+						<a id="contact_link" class="last_nav_link" href="#">Contact Us</a>
+					</div>
+					<form id="login_box">
+						<input id="login_username_b" type="text" value="Username" />
+						<input id="login_password_b" type="password" />
+						<div id="check_out_b">Check Out &#187;</div>
+						<input id="login_b" type="button" value="Login" />
+					</form>
+				</div>
 			</div>
-			<div class="nav_container">
-				<ul id="nav_categories" class="nav_categories">
-					<li><input type="text" id="search" class="search_box" value="Search" /></li>
+
+			<div id="right_col_container">
+				<div id="right_col_content">
+				
+					<div id="shade" class="scroll-pane">
+						<div id="shade_content">
+						</div>
+					</div>
+						
+					<div id="top_content">
+						<div id="blog_container">
+							<div id="blog_content">
+								<div class="title_top">The v-Blog</div>
+								<div id="blog" class="scroll-pane">
+									<span class="blog_title"><h1>Tech News for 23-10-2011</h1></span><br/>
+									<p class="blog_text">
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+									</p>
+								</div>
+							</div>
+						</div>
+						
+						<div id="feature_product_container">
+							<div class="title_top">Feature Product</div>
+							<div id="feature_product_content">
+
+									<?php
+											$featured_product = mysql_fetch_array( $featured_products, MYSQL_BOTH ); 
+											echo "<img id='featured_product_img' src='img/".$featured_product['product_image']."' alt='".$featured_product['product_name']."' />";
+											echo "<div id='featured_product_info'>";
+											$blank_stars = 5 - $featured_product['rating'];
+											for($stars = 5; $stars > 0; $stars--) {
+												if($blank_stars > 0) {
+													echo "<div class='blank_star'></div>";
+												} else {
+													echo "<div class='filled_star'></div>";
+												}
+												$blank_stars--;
+											}
+											echo "<h1>".$featured_product['product_name']."</h1><br/>";
+											$info_item = explode(",", $featured_product['info']);
+											foreach($info_item as $info)
+												echo $info."<br/>";
+											echo $featured_product['description']."<br/>";
+											echo "<h2>Price: </h2><h3>$".number_format($featured_product['price'], 2)."</h3>";
+											echo "</div>";
+											//echo "<div id='featured_product_buy' onclick='addToCart(event,\"".$featured_product['product_id']."\");'><img src='img/shopping_cart.png' alt='Add to Cart' /></div>";
+									?>
+		
+							</div>
+						</div>
+					</div>
+					
+					<div id="product_carousel_container">
+						<div id="carousel_button_left">&#171;</div>
+						<div id="carousel_button_right">&#187;</div>
+						<ul id="product_carousel"></ul>
+					</div>
+						
+				</div>
+				
+				<div id="footer_container">
+					<div id="footer_content">
+						This site is not official and is an assignment for a UCF Digital Media course.<br/>
+						Designed by Devin de la Parte
+					</div>
+				</div>
+				
+			</div>
+
+			<div id="left_col_container">
+				<ul id="nav_categories">
+					<li><input id="product_search_box" class="product_search_box" type="text" value="Search" /></li>
 					<?php
 						while( $category = mysql_fetch_array( $categories, MYSQL_BOTH ) )
 							echo "<li class='nav_main_cat' id='cat_".$category['category_id']."' onclick='loadCategory(event,\"".$category['category_id']."\")'>".$category['category']."</li>";
 					?>
 				</ul>
 			</div>
-			<div class="primary_container">
-				<div class="top_bar">
-					<form class="login_box">
-						<input type="text" id="username" class="username" value="Username" />
-						<input type="password" id="password" class="password" />
-						<div id="check_out" class="check_out">Check Out &#187;</div>
-						<input type="button" id="login" class="login" value="Login" />
-					</form>
-				</div>
-				
-				<div id="content_shade" class="content_shade">
-				</div>
-				
-				<div class="featured_product_container">
-					<div class="title_top"><img class="feature_product_title" src="img/feature_product.png" alt="Feature Product" /></div>
-					<div class="featured_product">
-						<?php
-							$featured_product = mysql_fetch_array( $featured_products, MYSQL_BOTH ); 
-							echo "<img class='featured_product_img' src='img/".$featured_product['product_image']."' alt='".$featured_product['product_name']."' />";
-							echo "<div class='featured_product_info'>";
-							$blank_stars = 5 - $featured_product['rating'];
-							for($stars = 5; $stars > 0; $stars--) {
-								if($blank_stars > 0) {
-									echo "<div class='blank_star'></div>";
-								} else {
-									echo "<div class='filled_star'></div>";
-								}
-								$blank_stars--;
-							}
-							echo "<h1>".$featured_product['product_name']."</h1><br/>";
-							echo "<div class='featured_product_buy' onclick='addToCart(event,\"".$featured_product['product_id']."\");'><img src='img/shopping_cart.png' alt='Add to Cart' /></div>";
-							$info_item = explode(",", $featured_product['info']);
-							foreach($info_item as $info)
-								echo $info."<br/>";
-							echo $featured_product['description']."<br/>";
-							echo "<h2>Price: </h2><h3>$".number_format($featured_product['price'], 2)."</h3>";
-							echo "</div>";
-						?>
-					</div>
-				</div>
-				
-				<div class="blog_container">
-					<div class="title_top"><img class="blog_title" src="img/blog.png" alt="The v-Blog" /></div>
-					<div class="blog">
-						<div class="blog_title"><h1>Tech News for 23-10-2011</h1></div><br/>
-						<p class="blog_text">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-						</p>
-					</div>
-				</div>
-				
-				<div class="product_carousel_container">
-					<div id="navPrev" class="carousel_button_left">&#171;</div>
-					<div id="navNext" class="carousel_button_right">&#187;</div>
-					<ul id="carousel" class="product_carousel"></ul>
-				</div>
-				
-				<div class="footer">
-					This site is not official and is an assignment for a UCF Digital Media course.<br/>
-					Designed by Devin de la Parte
-				</div>
-			</div>
+
+		</div>
+		
+		<div id="bg_footer">
 		</div>
 	</body>
-	
 </html>

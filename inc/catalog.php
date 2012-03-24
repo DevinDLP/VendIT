@@ -39,19 +39,19 @@
 		}
 		echo "</div>";
 		echo "<img class='pc_img' src='img/".$product['product_image']."' alt='".$product['product_name']."' />";
-		echo "<div class='pc_info_container'>";
-		echo "<div class='pc_price_container'><div class='pc_price'>$".number_format($product['price'], 2)."</div></div>";
+		echo "<div class='pc_price_container'><span class='pc_price'>$".number_format($product['price'], 2)."</span></div>";
 		echo "<div class='pc_info'>";
 		$info_item = explode(",", $product['info']);
 		foreach($info_item as $info)
 			echo $info."<br/>";
-		echo "</div></div></div>";
+		echo "</div></div>";
 		echo "<div class='pc_desc_container'>";
+		echo "<div class='pc_desc_top'></div>";
 		echo "<div class='pc_desc'>".$product['description']."</div></div>";
 		echo "<div class='pc_footer_container'>";
 		echo "<div class='pc_footer_top'></div>";
 		echo "<div class='pc_footer'>";
-		echo "<div class='pc_to_cart_button' onclick='addToCart(event,".$product['product_id'].");'><img src='img/shopping_cart.png' alt='Add to Cart' /></div>";
+		echo "<div class='pc_to_cart_button' onclick='addToCart(event,".$product['product_id'].");'></div>";
 		echo "</div></div></div></li>";
 	}
 		
